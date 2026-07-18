@@ -74,5 +74,5 @@ python train_reranker.py
 
 ## Dataset
 
-- `data/master_journals_expanded.csv` — main dataset (~50MB, not committed to git)
+- `data/master_journals_expanded.csv` — main dataset (~50MB, committed to git)
 - `data/faiss_index.bin` + `data/faiss_meta.pkl` — prebuilt FAISS index (auto-generated on first run)
