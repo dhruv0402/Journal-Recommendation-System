@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+src/rag/.env
+!*.env.example
+
+# Data artifacts (large binary files — rebuild with preload_phase2)
+data/faiss_index.bin
+data/faiss_meta.pkl
+data/phase0_embeddings.pkl
+data/phase0_faiss.index
+data/rag_embeddings.npy
+data/rag_faiss.index
+reranker_training.pkl
+src/phase2/reranker_model.pkl
+
+# Logs
+data/prediction_logs.jsonl
+
+# Outputs & caches
+outputs/
+.embedding_cache/
+.pytest_cache/
+
+# IDE / OS
+.vscode/
+.DS_Store
+__MACOSX/

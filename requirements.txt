@@ -1,0 +1,28 @@
+# Core ML / Search
+pandas>=2.0.0
+numpy>=1.24.0
+faiss-cpu>=1.7.4
+sentence-transformers>=2.6.0
+torch
+scikit-learn>=1.3.0
+
+# Fuzzy matching
+rapidfuzz>=3.5.0
+
+# API & serving
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.0.0
+
+# Frontend
+streamlit>=1.32.0
+requests>=2.31.0
+
+# LLM
+groq>=0.5.0
+
+# Utilities
+python-dotenv>=1.0.0
+
+# Testing
+pytest>=8.0.0

@@ -1,0 +1,21 @@
+detection:
+  enabled: true
+
+  thresholds:
+    exact_match: 1.0
+    fuzzy_match_min: 85
+
+  strategies:
+    use_exact: true
+    use_fuzzy: true
+    use_abbreviation: false
+
+  preprocessing:
+    lowercase: true
+    strip_punctuation: true
+    normalize_whitespace: true
+
+  output:
+    return_top_k: 3
+    include_score: true
+    include_strategy: true
