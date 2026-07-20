@@ -1,4 +1,7 @@
 import os
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
+
 import json
 import re
 import faiss
@@ -178,8 +181,9 @@ Return ONLY valid JSON with no text outside it:
             }
 
         try:
+            model = os.getenv("LLM_MODEL", "llama-3.1-8b-instant")
             response = self.client.chat.completions.create(
-                model="llama-3.1-8b-instant",
+                model=model,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0,
                 max_tokens=300,

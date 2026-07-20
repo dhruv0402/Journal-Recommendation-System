@@ -1,6 +1,11 @@
+import os
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
+
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
+
 
 from src.phase2.abstract_aggregation import aggregate_abstract_results
 from src.phase2.final_decision import make_final_decision

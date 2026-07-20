@@ -10,15 +10,31 @@ Runs 4 conditions on the same held-out test set:
 Produces a comparison table for the paper.
 """
 
+import os
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
+
+import torch
+torch.set_num_threads(1)
+
+import time
 import pandas as pd
 import numpy as np
 import json
-import os
 from datetime import datetime
 from rank_bm25 import BM25Okapi
 
 # ── import pipeline components directly ──────────────────────────────────────
-from src.phase2.optimized_phase2 import preload_phase2, run_phase2_fast, _model
+from src.phase2.optimized_phase2 import preload_phase2, run_phase2_fast
+import src.phase2.optimized_phase2 as opt
+opt._model = opt.SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
+_model = opt._model
+
 from src.phase2.abstract_aggregation import aggregate_abstract_results
 from src.phase2.scope_reranker import rerank_with_scope
 from src.phase2.learning_reranker import rerank_with_learning
@@ -262,6 +278,9 @@ for i, (_, row) in enumerate(test_df.iterrows()):
             per_journal[c][truth]["h1"].append(s["h1"])
             per_journal[c][truth]["h3"].append(s["h3"])
             per_journal[c][truth]["mrr"].append(s["mrr"])
+
+        # Rate-limiting delay for Groq free-tier
+        time.sleep(2.0)
 
     except Exception as e:
         print(f"  [SKIP row {i}]: {e}")
