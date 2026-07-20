@@ -16,11 +16,11 @@ def check_title_against_dataset(user_title: str, dataset_titles: list[str]):
             "confidence": 0.0
         }
 
-    # Use rapidfuzz process.extractOne to find the best match
+    # Use rapidfuzz process.extractOne with token_set_ratio to handle prefixes/acronyms correctly
     best_match = process.extractOne(
         user_title,
         dataset_titles,
-        scorer=fuzz.token_sort_ratio
+        scorer=fuzz.token_set_ratio
     )
 
     if best_match:
